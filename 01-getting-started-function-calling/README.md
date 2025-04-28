@@ -109,6 +109,16 @@ Manages our AI assistants and their tools:
 - Maintains the tool registry
 - Handles function execution
 
+**Note:**
+ 
+`Assistant Service` is calling the tools 
+```python
+...
+content = tool["returns"](parameters)
+...
+```
+which is calling the python function in the ``tool["return"]` key of the tool dictionary object in the tools array.
+
 ### 3. Realtime Client (`realtime2.py`)
 Handles the low-level WebSocket functionality:
 - Manages connections to Azure OpenAI
