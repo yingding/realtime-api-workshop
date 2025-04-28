@@ -24,8 +24,7 @@ from realtime2 import RealtimeClient
 from dotenv import load_dotenv
 
 # Load environment variables from a .env file if present
-load_dotenv(override=True)
-
+load_dotenv("envs/.env", override=True)
 
 # =============================================================================
 # 2) Assistant Configuration

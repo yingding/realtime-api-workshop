@@ -25,6 +25,7 @@ AZURE_OPENAI_DEPLOYMENT=your_deployment_name
 
 Choose one of the following methods to run the demo:
 
+<!--
 ##### Option 1: Using uv (Recommended)
 [uv](https://github.com/astral-sh/uv) is a fast Python package installer and runner. If you haven't installed it yet:
 ```bash
@@ -36,8 +37,14 @@ Then navigate to the workshop directory and run the chat application:
 cd 01-getting-started-function-calling
 uv run chainlit run chat.py
 ```
+-->
 
 ##### Option 2: Using pip
+0. change your `.env` file path in the `chat.py`:
+```python
+load_dotenv("envs/.env", override=True)
+```
+
 1. Install dependencies from the root folder of the repository: (Skip this step if you have done azd up from the root folder)
    ```bash
    # From the root folder of the repository

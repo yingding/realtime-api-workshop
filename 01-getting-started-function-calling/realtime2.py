@@ -153,6 +153,7 @@ class RealtimeAPI(RealtimeEventHandler):
         self.acquire_token = get_bearer_token_provider(
             self.credentials, "https://cognitiveservices.azure.com/.default"
         )
+        # the model version is 2024-12-17, but the API version is 2024-10-01-preview
         self.api_version = "2024-10-01-preview"
         self.azure_deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]
         self.ws = None
