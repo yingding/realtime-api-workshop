@@ -149,13 +149,21 @@ class RealtimeAPI(RealtimeEventHandler):
             endpoint = endpoint.replace("https://", "wss://")
         self.url = endpoint
         self.api_key = os.getenv("AZURE_OPENAI_API_KEY", "")
+
+        # if not self.api_key:
+        #     self.credentials = AzureKeyCredential(self.api_key)
+        # else: 
+        #     self.credentials = DefaultAzureCredential()
+        #     self.acquire_token = get_bearer_token_provider(
+        #         self.credentials, "https://cognitiveservices.azure.com/.default"
+        #     )
+
         if not self.api_key:
-            self.credentials = AzureKeyCredential(self.api_key)
-        else: 
             self.credentials = DefaultAzureCredential()
             self.acquire_token = get_bearer_token_provider(
                 self.credentials, "https://cognitiveservices.azure.com/.default"
-            )
+            )      
+       
         # the model version is 2024-12-17, but the API version is 2024-10-01-preview
         self.api_version = "2024-10-01-preview"
         self.azure_deployment = os.environ["AZURE_OPENAI_DEPLOYMENT"]
