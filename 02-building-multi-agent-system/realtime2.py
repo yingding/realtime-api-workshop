@@ -636,7 +636,7 @@ class RealtimeClient(RealtimeEventHandler):
 
         # Additional config data
         self.session_config = {}
-        self.transcription_models = [{"model": "whisper-1"}]
+        # self.transcription_models = [{"model": "whisper-1"}]
         self.default_server_vad_config = {
             "type": "server_vad",
             "threshold": 0.5,

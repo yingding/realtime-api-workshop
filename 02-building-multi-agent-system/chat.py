@@ -10,7 +10,8 @@ from agents.sales import sales_assistant
 from agents.root import root_assistant
 from agents.technical import technical_assistant
 
-load_dotenv(override=True)
+load_dotenv("envs/.env", override=True)
+# load_dotenv(".env", override=True)
 
 
 async def setup_openai_realtime():

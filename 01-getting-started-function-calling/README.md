@@ -110,7 +110,7 @@ Manages our AI assistants and their tools:
 - Handles function execution
 
 **Note:**
- 
+
 `Assistant Service` is calling the tools 
 ```python
 ...
@@ -124,6 +124,12 @@ Handles the low-level WebSocket functionality:
 - Manages connections to Azure OpenAI
 - Streams audio data
 - Processes conversation events
+
+Using the optional transcriber
+
+Reference:
+* https://platform.openai.com/docs/api-reference/realtime-server-events/response/audio_transcript/done
+* https://community.openai.com/t/how-do-you-handle-user-transcripts-in-real-time-gpt-4o-chats/1241261
 
 ## Hands-on Exercises
 

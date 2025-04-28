@@ -23,11 +23,13 @@ AZURE_OPENAI_DEPLOYMENT=your_deployment_name
 
 Choose your preferred installation method:
 
+<!--
 ##### Option 1: Using uv (Recommended)
 ```bash
 cd 02-building-multi-agent-system
 uv run chainlit run chat.py
 ```
+-->
 
 ##### Option 2: Using pip
 1. Install dependencies from the root folder of the repository: (Skip this step if you have done azd up from the root folder)
@@ -65,6 +67,25 @@ Our customer service system consists of four specialized agents:
    - Processes service activation requests
    - Collects necessary customer information
    - Handles SIM card replacements
+
+
+**Note:**
+In the `chat.py`, the code section:
+```python
+...
+    openai_realtime.assistant.register_agent(activation_assistant)
+    openai_realtime.assistant.register_agent(sales_assistant)
+    openai_realtime.assistant.register_agent(technical_assistant)
+
+    # Register the root agent last to ensure every agent knows each other.
+    openai_realtime.assistant.register_root_agent(root_assistant)
+...
+```
+are registering the assistant with different tools.
+
+**Mental model**: 
+Assistant/Agent is also a tool with its own tools.
+You can setup the different configure für `class RealtimeClient(RealtimeEventHandler)` in `realtime2.py` to call the MaaS API.
 
 ## Hands-on Exercises
 

@@ -666,7 +666,7 @@ class RealtimeClient(RealtimeEventHandler):
             "max_response_output_tokens": 4096,
         }
         self.session_config = {}
-        self.transcription_models = [{"model": "whisper-1"}]
+        # self.transcription_models = [{"model": "whisper-1"}]
         self.default_server_vad_config = {
             "type": "server_vad",
             "threshold": 0.5,
