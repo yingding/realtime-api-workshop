@@ -8,6 +8,7 @@ A quick hands-on introduction to WebSocket communication through practical examp
 
 Choose one of the following methods to run the demo:
 
+<!--
 #### Option 1: Using uv (Recommended)
 [uv](https://github.com/astral-sh/uv) is a fast Python package installer and runner. If you haven't installed it yet:
 ```bash
@@ -25,6 +26,7 @@ In a new terminal, start the web client:
 cd 00-websocket-basics
 uv run -m http.server 8000
 ```
+-->
 
 #### Option 2: Using pip
 1. Install dependencies: (Skip this step if you have done azd up from the root folder)
@@ -58,6 +60,10 @@ http://localhost:8000
 - Open the browser's Developer Tools (Network tab) and observe:
   - A single WebSocket connection staying open
   - No continuous HTTP requests needed for updates
+
+```
+http://localhost:8000/00-websocket-basics/
+```
 
 ### 2. HTTP vs WebSocket Comparison
 Try both methods to get the ball's position:
