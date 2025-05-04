@@ -103,19 +103,21 @@ AZURE_SEARCH_SEMANTIC_CONFIGURATION=<YOUR_INDEX_NAME>-semantic-configuration
         AZURE_OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
         AZURE_SEARCH_API_KEY=<YOUR_SEARCH_API_KEY>
         ```
+    search api key can be found in Azure AI Search, "Settings" then "Manage admin keys"
 
     - **Identity based authentication**: This method uses Microsoft Entra ID to authenticate. It's more secure as it doesn't require storing sensitive keys. This will require the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli), as we will use the Azure CLI credential locally.
     
     To use identity based authentication, log in to your Azure account and select your subscription.
 
     ```bash
-    az login
+    az login --tenanat xxxxxx
     ```
     
     > [!IMPORTANT]
     > In order to use identity based authentication, you should grant your user the "Search Service Contributor" role in the Azure AI Search service and the "OpenAI Contributor" role in the Azure OpenAI service. 
 
 ### Run the solution
+0. `cd <repo_root>`
 
 1. Run this command to start the app:
 
