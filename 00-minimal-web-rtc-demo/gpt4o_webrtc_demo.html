@@ -1,0 +1,41 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Azure OpenAI GPT-4o WebRTC Demo</title>  
+</head>  
+<body>  
+<h2>Azure OpenAI GPT-4o WebRTC Demo</h2>  
+<label>Ephemeral Key: <input id="ephemeral" size="80" value="__EPHEMERAL_KEY__"></label>  
+<button onclick="startSession()">Start Session</button>  
+<div id="log"></div>  
+<script>
+const WEBRTC_URL = "https://eastus2.realtimeapi-preview.ai.azure.com/v1/realtimertc"; 
+//const WEBRTC_URL = "https://swedencentral.realtimeapi-preview.ai.azure.com/v1/realtimertc";  
+const DEPLOYMENT = "gpt-4o-mini-realtime-preview";  
+function log(msg) { const d = document.createElement("div"); d.textContent=msg; document.getElementById("log").appendChild(d); }  
+async function startSession() {  
+    const ephemeralKey = document.getElementById("ephemeral").value;  
+    const pc = new RTCPeerConnection();  
+    const stream = await navigator.mediaDevices.getUserMedia({audio:true});  
+    pc.addTrack(stream.getAudioTracks()[0]);  
+    const audioElem = document.createElement('audio'); audioElem.autoplay = true; document.body.appendChild(audioElem);  
+    pc.ontrack = evt => { audioElem.srcObject = evt.streams[0]; };  
+    const dc = pc.createDataChannel("realtime");  
+    dc.onopen = () => log("Data channel is open");  
+    dc.onmessage = e => log("Received event: " + e.data);  
+    const offer = await pc.createOffer(); await pc.setLocalDescription(offer);  
+    const sdpResp = await fetch(WEBRTC_URL + "?model=" + DEPLOYMENT, {  
+        method: "POST", body: offer.sdp,  
+        headers: {Authorization: `Bearer ${ephemeralKey}`, "Content-Type":"application/sdp"}  
+    });  
+    const answer = {type:"answer", sdp: await sdpResp.text()};  
+    await pc.setRemoteDescription(answer);  
+    const stopBtn = document.createElement("button");  
+    stopBtn.textContent = "Close Session";  
+    stopBtn.onclick = () => { dc.close(); pc.close(); log("Session closed."); };  
+    document.body.appendChild(stopBtn);  
+}  
+</script>  
+</body>  
+</html>  
